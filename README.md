@@ -13,3 +13,5 @@
 ## 파일 구성
 - `REPORT.md` - 코드 분석 보고서 (매뉴얼, 분석 내용 포함)
 - `PROMPTS.md` - AI 코딩 툴 프롬프트 로그
+- `run_demo.py` - Ollama + Qwen2.5-3B로 실행 가능한 데모 스크립트
+- `demo_results.json` - 데모 실행 결과 (3개 테스트 케이스)
