@@ -1,0 +1,50 @@
+[
+  {
+    "id": "test_1_table",
+    "query": "Compare the revenue and profit of Company A, B, and C in 2024. Which company has the best financial performance?",
+    "chosen_type": "chunk",
+    "expected_type": "table (statistical comparison)",
+    "subqueries": [
+      "Error occurred"
+    ],
+    "answer": "Based on the information provided regarding the financial performance of Company A, B, and C in 2024:\n\nCompany A reported a revenue of $50 million with a profit margin of 15%. This translates to a net profit of $7.5 million for the year.\n\nCompany B had a higher revenue of $60 million but faced some challenges as its profit margin was only at 10%, resulting in a net profit of $6 million.\n\nCompany C saw an impressive increase in both revenue and profit, with a total revenue of $80 million and a profit margin of 20%. This resulted in a substantial net profit of $16 million for the year.\n\nComparing these figures, Company C appears to have the best financial performance in 2024. It not only had the highest revenue but also achieved a higher profit margin, leading to an even larger net profit compared to its competitors.",
+    "time_min": 4.59
+  },
+  {
+    "id": "test_2_graph",
+    "query": "What are the citation relationships between Paper X, Paper Y, and Paper Z? Paper X cites Paper Y, and Paper Z cites both Paper X and Paper Y.",
+    "chosen_type": "chunk",
+    "expected_type": "graph (citation chain reasoning)",
+    "subqueries": [
+      "The given query is already quite simple and does not require further breakdown. Here's a summary of the citation relationships between Paper X, Paper Y, and Paper Z:",
+      "1. **Paper X** cites **Paper Y**.",
+      "2. **Paper Z** cites both **Paper X** and **Paper Y**.",
+      "This means:",
+      "- Paper X references or builds upon Paper Y.",
+      "- Paper Z references or builds upon both Paper X and Paper Y."
+    ],
+    "answer": "Based on the citation relationships provided, we can summarize as follows:\n\n1. **Paper X** cites **Paper Y**: This indicates that \"Attention Is All You Need\" (Paper X) is a reference to or has built upon \"Neural Machine Translation by Jointly Learning to Align and Translate\" (Paper Y).\n2. **Paper Z** cites both **Paper X** and **Paper Y**: This means that \"BERT: Pre-training of Deep Bidirectional Transformers\" (Paper Z) references or builds upon the Transformer architecture introduced in \"Attention Is All You Need\" (Paper X), as well as the attention mechanism discussed in \"Neural Machine Translation by Jointly Learning to Align and Translate\" (Paper Y).\n\nIn essence, **Paper Z** is a significant work that leverages both the advancements made in the field of Transformers and the attention mechanisms. It builds upon these foundational papers to further develop deep bidirectional transformers for pre-training purposes.\n\nTherefore, we can conclude that:\n- Paper Z cites \"Attention Is All You Need\" (Paper X) because it utilizes or extends the Transformer architecture.\n- Paper Z also cites \"Neural Machine Translation by Jointly Learning to Align and Translate\" (Paper Y) as it incorporates or builds upon the attention mechanism introduced in this paper.",
+    "time_min": 4.59
+  },
+  {
+    "id": "test_3_chunk",
+    "query": "What is the main contribution of the StructRAG paper?",
+    "chosen_type": "chunk",
+    "expected_type": "chunk (simple single-hop QA)",
+    "subqueries": [
+      "The given query \"What is the main contribution of the StructRAG paper?\" can be broken down into multiple simple and independent sub-problems as follows:",
+      "1. What is StructRAG?",
+      "2. Who authored the StructRAG paper?",
+      "3. When was the StructRAG paper published?",
+      "4. What are the three modules in the StructRAG framework?",
+      "5. What does each module do in the StructRAG framework?",
+      "6. How does the Hybrid Structure Router function within the StructRAG framework?",
+      "7. What is the role of the Scattered Knowledge Structurizer in the StructRAG framework?",
+      "8. How does the Structured Knowledge Utilizer work in the StructRAG framework?",
+      "9. What are the benefits or contributions of each module and how do they collectively contribute to the overall system?",
+      "This breakdown allows for a more focused analysis on different aspects of the StructRAG paper, which can be useful for understanding its main contribution from various perspectives."
+    ],
+    "answer": "It seems that there was an issue with retrieving the specific information about the \"StructRAG\" paper. Could you please provide more context or details so I can assist you better? If you're referring to a particular research paper, it would be helpful if you could specify its title or authors.",
+    "time_min": 4.14
+  }
+]

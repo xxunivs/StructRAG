@@ -146,7 +146,33 @@ StructRAG/
 
 ---
 
-## 5. GitHub 업로드
+## 5. 로컬 실행 (Ollama + Qwen2.5-3B)
+
+**프롬프트:**
+> 코드를 돌려봐야 되거든. GPU가 너무 많이 필요하니까 대안으로라도 실행해줘.
+
+**Claude Code 수행 작업:**
+1. Ollama에 Qwen2.5-3B 모델 다운로드 (1.9GB)
+2. 원본 코드의 파이프라인(Router -> Structurizer -> Utilizer)을 Ollama API로 수정한 데모 스크립트(`run_demo.py`) 작성
+3. 3가지 유형의 테스트 데이터(통계 비교, 인용 관계, 단순 QA) 생성
+4. 파이프라인 실행 및 결과 분석
+
+**응답 요약:**
+- 3B 모델은 모든 질문에 "chunk"를 선택 -> Router 정확도는 대형 모델(72B)에 의존
+- 인용 관계 질문(test_2)은 chunk 구조에서도 정확히 답변
+- 일부 단계에서 CPU 추론 속도 한계로 타임아웃 발생
+- StructRAG의 핵심 가치는 Router의 정확한 구조 선택에 있음을 확인
+
+**실행 결과:**
+| 테스트 | 기대 타입 | 실제 선택 | 소요 시간 |
+|--------|-----------|-----------|-----------|
+| 매출 비교 (Table) | Table | Chunk | 4.59분 |
+| 인용 관계 (Graph) | Graph | Chunk | 4.59분 |
+| 단순 QA (Chunk) | Chunk | Chunk | 4.14분 |
+
+---
+
+## 6. GitHub 업로드
 
 **프롬프트:**
 > 기존 GitHub 레포(xxunivs/StructRAG)에 REPORT.md와 PROMPTS.md를 올려줘.

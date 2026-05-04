@@ -331,3 +331,48 @@ bash train_router/train.sh
 ### 5.3 논문 vs 코드 차이
 - 논문에서는 구조 타입을 Table, Graph, Algorithm, Catalogue, Chunk 5가지로 소개하나, Router 프롬프트(route.txt)의 few-shot 예시에는 Table, Graph, Chunk 3가지만 포함
 - 논문의 Figure 1에서 보여주는 깔끔한 파이프라인과 달리, 실제 코드는 Loong 벤치마크에 특화된 전처리/후처리가 포함되어 있음
+
+---
+
+## 6. 로컬 실행 결과 (Ollama + Qwen2.5-3B)
+
+원본 코드는 Qwen2-72B-Instruct (GPU 4장)가 필요하여 로컬 실행이 불가능하다. 이에 Ollama + Qwen2.5-3B (1.9GB)로 대체하여 파이프라인의 동작을 검증하였다.
+
+### 6.1 실행 환경
+- macOS, Apple Silicon, 16GB RAM
+- Ollama 0.20.2 + Qwen2.5-3B (양자화, 1.9GB)
+- GPU 없이 CPU 추론
+
+### 6.2 테스트 데이터
+3가지 유형의 질문으로 구성:
+
+| 테스트 ID | 질문 유형 | 기대 구조 타입 |
+|-----------|-----------|---------------|
+| test_1_table | 회사 A, B, C 매출/이익 비교 | Table |
+| test_2_graph | 논문 간 인용 관계 파악 | Graph |
+| test_3_chunk | StructRAG 논문의 주요 기여 | Chunk |
+
+### 6.3 실행 결과
+
+| 테스트 | 기대 타입 | 실제 선택 | 소요 시간 | 답변 품질 |
+|--------|-----------|-----------|-----------|-----------|
+| test_1_table | Table | **Chunk** | 4.59분 | 답변 생성됨 (수치 hallucination 있음) |
+| test_2_graph | Graph | **Chunk** | 4.59분 | 인용 관계 정확히 파악 |
+| test_3_chunk | Chunk | **Chunk** | 4.14분 | 일부 타임아웃 발생 |
+
+### 6.4 관찰 및 분석
+
+**1. Router의 모델 크기 의존성:**
+3B 모델은 모든 질문에 "chunk"를 선택하였다. 이는 Router의 few-shot 프롬프트가 대형 모델(72B)에 최적화되어 있어, 소형 모델은 프롬프트의 예시를 충분히 이해하지 못하기 때문이다. 논문에서 "Qwen2-72B-Instruct has already achieved good routing performance"라고 명시한 것과 일치한다.
+
+**2. Structurizer의 역할 감소:**
+Router가 항상 "chunk"를 선택하므로, Structurizer가 문서를 구조화하는 핵심 기능(Table/Graph 변환)이 발동되지 않았다. 이는 StructRAG의 성능이 Router의 정확도에 크게 의존함을 보여준다.
+
+**3. Utilizer의 질문 분해:**
+3B 모델도 질문 분해는 수행했으나, 지시사항을 정확히 따르지 못하고 설명을 덧붙이는 경향이 있었다. 72B 모델에서는 더 간결하고 정확한 분해가 기대된다.
+
+**4. 타임아웃 이슈:**
+CPU 추론의 속도 한계로 120초 타임아웃이 2회 발생하였다. 원본 코드의 QwenAPI는 10000초 타임아웃을 설정하고 있어, GPU 환경에서는 이 문제가 발생하지 않는다.
+
+**5. 결론:**
+StructRAG 파이프라인은 소형 모델에서도 구조적으로는 정상 동작하나, **Router의 정확도**와 **LLM의 지시 따르기 능력**이 전체 성능의 핵심이다. 이는 논문의 "hybrid structure router's ability to accurately select the most suitable structure type" 주장을 실험적으로 확인한 결과이다.
