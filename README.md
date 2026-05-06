@@ -1,6 +1,6 @@
-# StructRAG 논문 오픈소스 코드 분석
+# StructRAG 논문 오픈소스 코드 구현
 
-캡스톤디자인1 - AI 코딩 툴을 이용한 논문 오픈소스 코드 분석 과제
+캡스톤디자인1 - AI 코딩 툴을 이용한 논문 오픈소스 코드 구현 과제
 
 ## 논문 정보
 - **제목:** StructRAG: Boosting Knowledge Intensive Reasoning of LLMs via Inference-time Hybrid Information Structurization
@@ -11,7 +11,7 @@
 - Claude Code (Anthropic)
 
 ## 파일 구성
-- `REPORT.md` - 코드 분석 보고서 (매뉴얼, 분석 내용 포함)
+- `REPORT.md` - 코드 구현 보고서 (분석, 구현, 실행 결과 포함)
 - `PROMPTS.md` - AI 코딩 툴 프롬프트 로그
-- `run_demo.py` - Ollama + Qwen2.5-3B로 실행 가능한 데모 스크립트
-- `demo_results.json` - 데모 실행 결과 (3개 테스트 케이스)
+- `run_demo.py` - StructRAG 파이프라인 재구현 (Ollama + Qwen2.5-3B)
+- `demo_results.json` - 구현 코드 실행 결과 (3개 테스트 케이스)

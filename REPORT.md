@@ -1,4 +1,4 @@
-# StructRAG 오픈소스 코드 분석 보고서
+# StructRAG 오픈소스 코드 구현 보고서
 
 **논문:** StructRAG: Boosting Knowledge Intensive Reasoning of LLMs via Inference-time Hybrid Information Structurization (ICLR 2025)
 
@@ -334,9 +334,9 @@ bash train_router/train.sh
 
 ---
 
-## 6. 로컬 실행 결과 (Ollama + Qwen2.5-3B)
+## 6. 로컬 환경 구현 및 실행 결과 (Ollama + Qwen2.5-3B)
 
-원본 코드는 Qwen2-72B-Instruct (GPU 4장)가 필요하여 로컬 실행이 불가능하다. 이에 Ollama + Qwen2.5-3B (1.9GB)로 대체하여 파이프라인의 동작을 검증하였다.
+원본 코드는 Qwen2-72B-Instruct (GPU 4장)가 필요하여 로컬 실행이 불가능하다. 이에 원본 코드의 파이프라인을 분석하여 Ollama + Qwen2.5-3B (1.9GB) 환경에서 동작하도록 재구현하였다 (`run_demo.py`). OllamaAPI 클래스, Router, Structurizer, Utilizer 4개 모듈을 구현하고, 테스트 데이터 3종을 생성하여 end-to-end 파이프라인을 실행하였다.
 
 ### 6.1 실행 환경
 - macOS, Apple Silicon, 16GB RAM
