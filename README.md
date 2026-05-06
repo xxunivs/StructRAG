@@ -11,7 +11,6 @@
 - Claude Code (Anthropic)
 
 ## 파일 구성
-- `REPORT.md` - 코드 구현 보고서 (분석, 구현, 실행 결과 포함)
 - `PROMPTS.md` - AI 코딩 툴 프롬프트 로그
 - `run_demo.py` - StructRAG 파이프라인 재구현 (Ollama + Qwen2.5-3B)
 - `demo_results.json` - 구현 코드 실행 결과 (3개 테스트 케이스)
